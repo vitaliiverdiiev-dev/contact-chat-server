@@ -3,10 +3,15 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci --omit=dev
+RUN npm ci
 
 COPY ./src ./src
+COPY tsconfig.json ./
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["node", "src/index.js"]
+RUN npm ci --omit=dev && npm cache clean --force
+
+EXPOSE $PORT
+
+CMD ["npm", "start"]

@@ -89,15 +89,15 @@ export const startWebSocketServer = (port: number): void => {
   };
 };
 
-function validateEmail(email: string): boolean {
+const validateEmail = (email: string): boolean => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
-}
+};
 
 let onMessageFromClient: (clientId: string, message: string) => void;
 
-export function onClientMessage(
+export const onClientMessage = (
   callback: (clientId: string, message: string) => void
-) {
+) => {
   onMessageFromClient = callback;
-}
+};
